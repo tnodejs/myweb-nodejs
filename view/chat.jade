@@ -1,0 +1,25 @@
+#chatroom.room
+	// 连接界面 
+	#connecting
+		.wrap 正在连接到服务器...
+	//主界面
+	#chat.clearfix
+		//消息区域
+		#messages
+			#lines.scrollbar
+				.line
+					.message-header
+						.message-from 系统消息
+						.message-timestamp 2011-12-31
+					.message-text 这个是消息内容
+		//在线列表区域
+		#online.clearfix
+			.title 在线成员列表
+			#nicknames.scrollbar
+		//发送消息区域
+	#send-message
+		input#message
+		button#btn 发送
+script(type="text/javascript")
+	var userName = '#{username}';
+script(src='/js/index.js')

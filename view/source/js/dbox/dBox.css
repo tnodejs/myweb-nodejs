@@ -1,0 +1,61 @@
+#dBox{
+    background-color: rgb(232,237,241);
+    position:absolute;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-box-shadow: 2px 2px 5px #ccc;
+    -moz-box-shadow: 2px 2px 5px #ccc;
+    box-shadow: 2px 2px 5px #ccc;
+}
+#d_head{
+    background:-moz-linear-gradient(top, rgb(248,249,250),rgb(232,237,241));
+    width:100%;
+    height:20px;
+    background:-webkit-gradient(linear, 0 0, 0 100%, from(rgb(248,249,250)), to(rgb(232,237,241)));
+}
+#d_title{
+    float:left;
+    width:90%;
+    color:black;
+    height: 20px;
+    font-size:15px;
+    text-align: center;
+}
+#d_close{
+    float:right;
+    cursor:pointer;
+    margin-right:15px;
+    margin-top: 5px;
+    color:#00E;
+    width:15px;
+    height: 15px;
+    background:url('remove.png');
+    background-position: -232px -84px;
+}
+#d_content{
+    width:100%;
+    height:83%;
+    padding:3px;
+}
+#d_iframebg{
+    position:absolute;
+    top:0;
+    left:0;
+    width:0;
+    height:0;
+    border:none;
+}
+#d_bg{
+    background-color:#000;
+    z-index:0;
+    position:absolute;
+    top:0;
+    left:0;
+}
+.button::-moz-focus-inner{border: 0px;}
+
+
+
+
+

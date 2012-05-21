@@ -1,0 +1,23 @@
+{
+    "t_user" : {
+        "key" : "f_uid",
+        "prototype" : "f_uname，f_nike_name，f_sex，f_email，f_password，f_position，f_university，f_hometown，f_high_school，f_atvatar，f_create_time，f_login_state，f_state"
+    },
+
+    "t_robot" : {
+        "key" : "f_rid",
+        "prototype" : "f_robot_name,f_uid,f_sex,f_birtyday"
+    },
+
+    "t_friend_list" : {
+        "key" : "f_fid",
+        "prototype" : "f_reid,f_rsid,f_state,f_send_time"
+    },
+
+    "t_robot_data" : {
+        "key" : "f_rdid",
+        "prototype" : "f_rid,f_content,f_response_text"
+    }
+
+
+}

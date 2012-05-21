@@ -1,0 +1,13 @@
+.left_image_button{
+    z-index:1;
+    position:absolute;
+    height:60px;
+    cursor: pointer;
+}
+
+.right_image_button{
+    z-index:1;
+    position:absolute;
+    height:60px;
+    cursor: pointer;
+}

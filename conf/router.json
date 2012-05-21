@@ -1,0 +1,27 @@
+{
+    "test": {
+        "con" : "test",
+        "cla" : "test",
+        "fun" :"test"
+    },
+    "favicon.ico" : {
+        "con" : "",
+        "cla" : "",
+        "fun" : ""
+    },
+    "login" : {
+        "con" : "index_controller",
+        "cla" : "IndexController",
+        "fun" : "loginAct"
+    },
+    "index" : {
+        "con" : "index_controller",
+        "cla" : "IndexController",
+        "fun" : "loginPageAct"
+    },
+    "loginS" : {
+        "con" : "index_controller",
+        "cla" : "IndexController",
+        "fun" : "toMainPageAct"
+    }
+}

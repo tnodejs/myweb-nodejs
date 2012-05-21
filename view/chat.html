@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>聊天室</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<link href="../public/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="room">
+	<!-- 连接界面-->
+	<div id="connecting">
+		<div class="wrap">正在连接到服务器...</div>
+	</div> 
+	
+	<div id='chat' class='clearfix'>
+		<div id="messages">
+			<div class="scrollbar" id="lines"><div class="line type-system">	<div class="message-header">		<span class="message-from">系统</span>		<span class="message-timestamp">Tue Sep 27 2011 13:48:47 GMT+0800</span>	</div>	<div class="message-text">		已进入房间!在发送的消息前面加”@对方名字“+空格+消息可以给某人发送私信。	</div></div></div>
+		</div>
+		<div id="online" class='clearfix'>
+			<h3>在线成员列表</h3>
+			<div id="nicknames" class="scrollbar">
+				<div class="line">老雷</div>
+				<div class="line">神马</div>
+			</div>
+		</div>
+	</div>
+	<div id="send-message">
+		<input id="message">
+		<button onclick="sendmessage()">发送</button>
+	</div>
+</div>
+</body>
+</html>

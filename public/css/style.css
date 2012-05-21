@@ -1,0 +1,122 @@
+body{
+	padding:0;
+	margin:0;
+	background:#fff;
+}
+.clearfix{display:block;zoom:1;}
+.clearfix:after{content:".";display:block;visibility:hidden;height:0;clear:both;}
+.room {
+	width: 960px;
+	left: 0;
+	border:2px solid #0087BC;
+	border-top:none;
+    margin: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+	bottom:30px;
+}
+
+#connecting .wrap {
+	padding-top: 200px;
+	text-align: center;
+}
+#chat {
+	display: none;
+}
+#messages {
+	float: left;
+	width: 800px;
+	position:fixed;
+	bottom:35px;
+	top:0;
+}
+#lines {
+	overflow-y: scroll;
+	height:100%;
+}
+
+#send-message {
+	position: fixed;
+	width: 964px;
+	height: 30px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	font-size: 14px;
+}
+#send-message #message {
+	border: 2px solid #0087BC;
+	padding: 4px;
+	width: 880px;
+}
+#send-message button {
+	padding: 4px 10px;
+	background-color: #0087BC;
+	border: 2px solid #0087BC;
+	color: white;
+	font-weight: bold;
+	border-radius: 6px;
+}
+#messages #lines .line {
+	font-size: 14px;
+	margin: 10px;
+	border: 1px solid #F2F2F2;
+	padding: 8px;
+	border-radius: 10px;
+}
+.line .message-header {
+	padding-bottom: 8px;
+}
+.line .message-from {
+	font-weight: bold;
+	color: #00781E;
+	padding-right: 20px;
+}
+.line .message-timestamp {
+	color: #989898;
+	font-weight: bold;
+	font-size: 12px;
+}
+.line .message-text {
+	font-size: 14px;
+}
+.type-error {
+	background-color: #FFECE4;
+}
+.type-own {
+	background-color: #F3FFF0;
+}
+.type-system {
+	background-color: #FFECE4;
+}
+.type-private {
+	background-color: #ECF3FF;
+}
+#online{
+	margin-left:810px;
+	width: 150px;
+	position:fixed;
+	top:0;
+	bottom:35px;
+	marign:auto;
+}
+#chat #online #nicknames {
+	position:fixed;
+	top:40px;
+	bottom:35px;
+	overflow-y: scroll;
+	width:145px;
+}
+#nicknames .line {
+	font-weight: bold;
+	color: #00781E;
+	padding: 4px 0px;
+	font-size: 12px;
+	cursor: pointer;
+}
+#online h2{
+	font-weight:bold;
+	font-size:14px;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>chating</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <script type="text/javascript" src="source/js/jquery.min.js"></script>
+</head>
+<body>
+<form>
+    <li>用户：<input type="text" class='input_text'></li>
+    <li>密码：<input type='password' class='input_text'> </li>
+    <li><input type="button" class='submit' value='提交'/></li>
+</form>
+</body>
+<script>
+    var $inputValue = $('.input_text');
+    $(".submit").click(function(){
+        $.post("/login",{v :{"username":$($inputValue[0]).val(), "password":$($inputValue[1]).val()}}, function(data){
+            if(data.code == 0){
+                window.location.href="/loginS";
+            } else {
+                console.log(data.msg);
+            }
+        });
+    });
+</script>
+</html>

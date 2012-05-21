@@ -1,0 +1,13 @@
+{
+
+    "1001": {
+        "errorMsg": "can not connect to mysql database",
+        "errorLevel": 1,
+        "errorFile" : "error.txt"
+    },
+    "1002": {
+        "errorMsg": "parameters error",
+        "errorLevel": 1,
+        "errorFile" : "error.txt"
+    }
+}
