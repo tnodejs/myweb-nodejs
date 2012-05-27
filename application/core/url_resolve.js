@@ -5,14 +5,14 @@
  * Time: 下午10:35
  * To change this template use File | Settings | File Templates.
  */
-var app = module.export = express.createServer();
+var app = module.export = Module.express.createServer();
 
-//system config
+//系统配置，express数据配置
 var systemConfig = function(){
     app.configure(function(){
-        app.use(express.bodyParser());
-        app.use(express.cookieParser());
-        app.use(express.methodOverride());
+        app.use(Module.express.bodyParser());
+        app.use(Module.express.cookieParser());
+        app.use(Module.express.methodOverride());
         app.use(app.router);//要放在bodyParser之后，处理post
         app.use(function(req, res, next) {
             if(/\.ejs$/.test(req.url)) {
@@ -21,12 +21,15 @@ var systemConfig = function(){
             }
             res.sendfile(BASE_DIR + req.url);
         });
-        app.use(express.static(BASE_DIR + "/view"));
+
+        //设定静态资源文件夹
+        app.use(Module.express.static(BASE_DIR + "/view"));
         app.set('view engine', 'jade');
-        app.use(express.static(PUBLIC));
+        app.use(Module.express.static(PUBLIC));
     });
 };
 
+//服务器启动，开始监听端口
 var listenPort = function(){
     app.listen(3000, function(){
         var addr = app.address();
@@ -47,9 +50,12 @@ exports.getActionInfo = function(){
 };
 
 function callUrlRequest(req, res){
-    var routerMsg = getUrlConf();
-    var key = req.params.key;
+    //获取配置，如果配置信息不变，直接获取
+    var routerMsg = initVar.routerConfig ? initVar.routerConfig : getUrlConf(),
+        key = req.params.key;
     var session = checkSession(req, key);
+
+    //去除NodeJs自带请求数据
     if(key == "favicon.ico"){return;};
     if(session == 0){
         res.redirect('/index');
@@ -62,24 +68,26 @@ function callUrlRequest(req, res){
     controllerObj[routerMsg[key].fun].call();
 }
 
+//获取url配置信息，读取配置文件
 function getUrlConf(){
     var routerMsg = {};
     try{
-        var str = fs.readFileSync(CONF + 'router.json','utf8');
+        var str = Module.fs.readFileSync(CONF + 'router.json','utf8');
         routerMsg = JSON.parse(str);
     }catch(e){
-        sys.debug("JSON parse configs/hot_deployer.json fails")
+        Module.sys.debug("JSON parse configs/hot_deployer.json fails")
     }
+    initVar.routerConfig = routerMsg;
     return routerMsg;
 }
 
 //判断用户是否登录
 function checkSession(req, key){
    if(key == "index" || key == "login"){
-       if(Session.username && Session.username != ''){
+       if(Module.Session.username && Module.Session.username != ''){
             return 2;
        }
         return 1;
    }
-   return Session.username && Session.username != '' ? 1 : 0;
+   return Module.Session.username && Module.Session.username != '' ? 1 : 0;
 }

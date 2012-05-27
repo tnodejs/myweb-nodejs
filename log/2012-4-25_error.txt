@@ -1,0 +1,2 @@
+[20:11:46] [1] [can not connect to mysql database]  [ClientConnectionReady Error: ]
+[20:25:44] [1] [can not connect to mysql database]  [ClientConnectionReady Error: ] 

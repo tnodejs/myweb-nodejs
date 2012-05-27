@@ -20,22 +20,22 @@ function IndexController() {
     this._obj = new UserModel();
 
     this.loginPageAct = function(){
-        if(Session.username){
-            _parent.displayJade(VIEW + 'chat',{username:Session.username});
+        if(Module.Session.username){
+            _parent.displayJade(VIEW + 'chat',{username:Module.Session.username});
         } else {
             _parent.displayHtml("main_view.html");
         }
     };
 
     this.toMainPageAct = function(){
-        _parent.displayJade(VIEW + 'chat',{username:Session.username});
+        _parent.displayJade(VIEW + 'chat',{username:Module.Session.username});
     };
 
     this.loginAct = function(){
         var loginJson = _parent._req.body.v;
         _self._obj.checkUser(loginJson.username,loginJson.password,function(result){
             if(result.length > 0){
-                Session.username = loginJson.username;
+                Module.Session.username = loginJson.username;
                 _parent._res.send({"code":"0", "msg":"success", "data":""});
                 return;
             }
@@ -50,7 +50,7 @@ function IndexController() {
             if(result == 0){
                 _parent._res.send({"code":"-1", "msg":"sign up error", "data":""});
             } else {
-                Session.username = signJson.username;
+                Module.Session.username = signJson.username;
                 _parent._res.send({"code":"0", "msg":"success", "data":""});
             }
         })

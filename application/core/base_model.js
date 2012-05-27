@@ -7,7 +7,8 @@
  */
 var Client = require('mysql').Client,
     client = new Client(),
-    cfg = getServerConf();
+    cfg = initVar.serverConfig ? initVar.serverConfig : getServerConf(),
+    Log = require(CORE + "log.js");
 function init(){
     client.host = cfg['host'];
     client.port = cfg['port'];
@@ -17,7 +18,7 @@ function init(){
         if(error) {
             console.log('ClientConnectionReady Error: ' + error.message);
             client.end();
-            return;
+            return false;
         }
     });
 }
@@ -34,7 +35,7 @@ function BaseModel(table){
     this._tableConfig = tableMsg['value'];
     this.add = function(values,callBack){
         tableMsg = getTableConfigFromJson(this._table);
-        addMsg = changeJsonToString(values);
+        var addMsg = changeJsonToString(values);
         client.query('INSERT INTO ' + this._table + "(" + addMsg["key"] +") values(" + addMsg["value"] +")",
             function(error, results) {
                 if(error) {
@@ -53,7 +54,7 @@ function BaseModel(table){
      */
     this.update = function(key,values,callBack){
         var jsonString = changeJsonToString(values);
-        client.query('update' + tableName +"set " + jsonString +" where " + this._key + " = " +key,
+        client.query('update' + this._table +"set " + jsonString +" where " + this._key + " = " +key,
             function(error, results) {
                 if(error) {
                     console.log("ClientReady Error: " + error.message);
@@ -124,11 +125,12 @@ function BaseModel(table){
 function getServerConf(){
     var serverMsg = {};
     try{
-        var str = fs.readFileSync(global.CONF + 'config.json');
+        var str = Module.fs.readFileSync(global.CONF + 'config.json');
         serverMsg = JSON.parse(str);
     }catch(e){
-        sys.debug("JSON parse configs/hot_deployer.json fails")
+        Module.sys.debug("JSON parse configs/hot_deployer.json fails")
     }
+    initVar.serverConfig = serverMsg;
     return serverMsg;
 }
 
@@ -136,10 +138,10 @@ function getServerConf(){
 function getTableConfigFromJson(tableName){
     var tableMsg = {};
     try{
-        var str = fs.readFileSync(global.CONF + 'table.json','utf8');
+        var str = Module.fs.readFileSync(global.CONF + 'table.json','utf8');
         tableMsg = JSON.parse(str);
     }catch(e){
-        sys.debug("JSON parse configs/hot_deployer.json fails")
+        Module.sys.debug("JSON parse configs/hot_deployer.json fails")
     }
     return tableMsg[tableName];
 }

@@ -12,7 +12,7 @@ global.CON      = global.APP + "/controller/";
 global.CORE     = global.APP + "/core/";
 global.MODEL    = global.APP + "/model/";
 global.CONF     = global.BASE_DIR + "/conf/";
-global.log      = global.BASE_DIR + "/log/";
+global.LOG      = global.BASE_DIR + "/log/";
 global.PUBLIC   = global.BASE_DIR + "/public/";
 global.VIEW     = global.BASE_DIR + "/view/";
 
@@ -20,15 +20,25 @@ global.VIEW     = global.BASE_DIR + "/view/";
 /**
  * modules引入
  */
-global.express = require('express');
-global.sio = require('socket.io');
-global.fs=require('fs');
-global.path = require('path');
-global.url = require('url');
-global.parseCookie = require('connect').utils.parseCookie;
-global.MemoryStore = require('./node_modules/connect/lib/middleware/session/memory');
-global.Session = require('./node_modules/connect/lib/middleware/session/session');
-global.sys = require('util');
+global.Module = {
+    express : require('express'),
+    sio : require('socket.io'),
+    fs : require('fs'),
+    path : require('path'),
+    url : require('url'),
+    parseCookie : require('connect').utils.parseCookie,
+    MemoryStore : require('./node_modules/connect/lib/middleware/session/memory'),
+    Session : require('./node_modules/connect/lib/middleware/session/session'),
+    sys : require('util')
+}
+/*
+ *初始变量,主要是初始一些静态变量
+ */
+global.initVar = {
+    routerConfig   : "",
+    errorConfig    : "",
+    serverConfig   : ""
+}
 
 urlResolve = require(CORE + "url_resolve");
 urlResolve.getActionInfo();

@@ -14,11 +14,14 @@ function BaseController(){
         _self._req = req;
         _self._res = res;
     };
+
+    //显示一个html文件
     this.displayHtml = function(htmlName){
-        var file = fs.readFileSync(VIEW + htmlName);
+        var file = Module.fs.readFileSync(VIEW + htmlName);
         _self._res.end(file);
     };
 
+    //指定显示一个jade文件
     this.displayJade = function(jadeName, json){
         _self._res.render(jadeName,json);
     };
