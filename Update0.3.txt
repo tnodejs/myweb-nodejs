@@ -1,0 +1,24 @@
+myweb0.3更新说明
+1、之前存在的登录session问题已经修复，使用connect-redis模块实现登录session
+2、路由处理由之前的单个key决定路由改为key和参数c共同决定路由；
+例如：
+http://127.0.0.1:3000/index?c=signUpPage
+则访问的是indexcontroller中的signUpPageAct action
+这样的好处，主要是解决是：当路由处理请求变多，导致配置信息过多，从而影响效率。
+3、同时lib库添加了一个nodejs邮件发送功能的模块，有需要的童鞋可以参考代码index_controller.js
+
+
+备注：没有写太多注释，看代码比较痛苦，这几天开始注重代码的质量
+
+最近比较懒，更新的不是很勤快。正在做一个nodejs的应用，该应用主要是基于myweb框架开发的一个用户注册、登录、邮箱验证、聊天交友等功能。希望大家继续支持我，给我拍砖！
+也希望大家继续来我的论坛交流学习www.tnodejs.com or tnodejs.com
+我就是danhuang
+——————————————————————————————————
+你赋予人生何种意义，他就是何种意义
+——————————————————————————————————
+if(life.wantToBe == 'fish'){
+	your.career = 'fish';
+} else {
+	your.career = 'not fish';
+}
+console.log("Anyway you must believe yourself!");
