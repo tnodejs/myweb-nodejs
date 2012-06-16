@@ -5,14 +5,17 @@
  * Time: 下午10:35
  * To change this template use File | Settings | File Templates.
  */
-var app = module.export = Module.express.createServer();
-
+var app = module.export = Module.express.createServer(),
+    RedisStore = require('connect-redis')(Module.express),
+    Permissions = {"loginPageAct":true,"loginAct":true,"signUpPageAct":true,"signUpAct":true};
+global.io = Module.sio.listen(app);
 //系统配置，express数据配置
 var systemConfig = function(){
     app.configure(function(){
         app.use(Module.express.bodyParser());
         app.use(Module.express.cookieParser());
         app.use(Module.express.methodOverride());
+        app.use(Module.express.session({ secret: "keyboard cat", store: new RedisStore }));
         app.use(app.router);//要放在bodyParser之后，处理post
         app.use(function(req, res, next) {
             if(/\.ejs$/.test(req.url)) {
@@ -52,20 +55,20 @@ exports.getActionInfo = function(){
 function callUrlRequest(req, res){
     //获取配置，如果配置信息不变，直接获取
     var routerMsg = initVar.routerConfig ? initVar.routerConfig : getUrlConf(),
-        key = req.params.key;
-    var session = checkSession(req, key);
-
+        key = req.params.key,
+        fun = (req.query.c ? req.query.c : "loginPage")+ "Act";
+    var session = checkSession(req, fun);
     //去除NodeJs自带请求数据
     if(key == "favicon.ico"){return;};
     if(session == 0){
         res.redirect('/index');
         return;
     }
-    console.log("[key:"+ key +"] " + "[class:" + routerMsg[key].cla + "] " + "[controller:" + routerMsg[key].fun +"]");
+    console.log("[key:"+ key +"] " + "[class:" + routerMsg[key].cla + "] " + "[controller:" + fun +"]");
     require(CON + routerMsg[key].con);
     var controllerObj = eval("new " + routerMsg[key].cla);
     controllerObj.init(req, res);
-    controllerObj[routerMsg[key].fun].call();
+    controllerObj[fun].call();
 }
 
 //获取url配置信息，读取配置文件
@@ -82,12 +85,12 @@ function getUrlConf(){
 }
 
 //判断用户是否登录
-function checkSession(req, key){
-   if(key == "index" || key == "login"){
-       if(Module.Session.username && Module.Session.username != ''){
+function checkSession(req, fun){
+   if(Permissions[fun]){
+       if(req.session.username && req.session.username != ''){
             return 2;
        }
         return 1;
    }
-   return Module.Session.username && Module.Session.username != '' ? 1 : 0;
+   return req.session.username && req.session.username != '' ? 1 : 0;
 }

@@ -25,5 +25,10 @@ function BaseController(){
     this.displayJade = function(jadeName, json){
         _self._res.render(jadeName,json);
     };
+
+    //返回json数据到客户端
+    this.returnError = function(code,msg,dataJson){
+        _self._res.send({"code":code, "msg":msg, "data":dataJson});
+    };
 }
 global.BaseController = BaseController;

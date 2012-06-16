@@ -53,8 +53,9 @@ function BaseModel(table){
      * 返回：更新成功返回true，更新失败返回false
      */
     this.update = function(key,values,callBack){
-        var jsonString = changeJsonToString(values);
-        client.query('update' + this._table +"set " + jsonString +" where " + this._key + " = " +key,
+        var jsonString = changeJsonToUpdateData(values);
+        console.log('update ' + this._table +" set " + jsonString +" where " + this._key + " = " +key);
+        client.query('update ' + this._table +" set " + jsonString +" where " + this._key + " = " +key,
             function(error, results) {
                 if(error) {
                     console.log("ClientReady Error: " + error.message);
@@ -109,7 +110,6 @@ function BaseModel(table){
      */
     this.query = function(where, selectFields, callBack){
         selectFields = selectFields ? selectFields:"*";
-        console.log('SELECT ' + selectFields + ' FROM ' + this._table + ' where ' + where);
         client.query('SELECT ' + selectFields + ' FROM ' + this._table + ' where ' + where,
             function selectCb(error, results) {
                 if (error) {
@@ -152,10 +152,18 @@ function changeJsonToString(json){
         jsonValue = [];
     for(var item in json){
         jsonKey.push(item);
-        jsonValue.push(json[item]);
+        jsonValue.push("'"+json[item]+"'");
     }
     jsonKey.join(",");
     jsonValue.join(",");
     return {"key":jsonKey,"value":jsonValue};
+}
+
+function changeJsonToUpdateData(json){
+    var myJson = [];
+    for(var item in json){
+        myJson.push(item+"='" + json[item] +"'");
+    }
+    return   myJson.join(",");
 }
 global.BaseModel = BaseModel;
