@@ -115,7 +115,7 @@ function IndexController() {
             port: 25,
             use_authentication: true,
             user: '492383469@qq.com',
-            pass: '259695520240juan'
+            pass: '*************'
         };
         var resetJson = {
             "f_uname"       : signJson.username,
