@@ -55,6 +55,8 @@ function BaseModel(table){
     this.update = function(key,values,callBack){
         var jsonString = changeJsonToUpdateData(values);
         console.log('update ' + this._table +" set " + jsonString +" where " + this._key + " = " +key);
+        //给人愚见，这里的sql语句可以这么写
+        //client.query('update ? set ? where ? = ?', [this._table, jsonString, this._key, key], function(...){...})
         client.query('update ' + this._table +" set " + jsonString +" where " + this._key + " = " +key,
             function(error, results) {
                 if(error) {
